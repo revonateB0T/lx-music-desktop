@@ -99,18 +99,6 @@ export const initSingleInstanceHandle = () => {
 }
 
 export const applyElectronEnvParams = () => {
-  // Is disable hardware acceleration
-  if (global.envParams.cmdParams.dha) app.disableHardwareAcceleration()
-  if (global.envParams.cmdParams.dhmkh) app.commandLine.appendSwitch('disable-features', 'HardwareMediaKeyHandling')
-
-  // fix linux transparent fail. https://github.com/electron/electron/issues/25153#issuecomment-843688494
-  if (process.platform == 'linux') app.commandLine.appendSwitch('use-gl', 'desktop')
-
-  // https://github.com/electron/electron/issues/22691
-  app.commandLine.appendSwitch('wm-window-animations-disabled')
-
-  app.commandLine.appendSwitch('--disable-gpu-sandbox')
-
   // proxy
   if (global.envParams.cmdParams['proxy-server']) {
     app.commandLine.appendSwitch('proxy-server', global.envParams.cmdParams['proxy-server'])
